@@ -1,4 +1,4 @@
-name: push-workflow # 생략해도 상관없지만 Action화면에서 표현될 시각화할 이름이기 때문에 명시적 작성
+name: push-workflow 1 # 생략해도 상관없지만 Action화면에서 표현될 시각화할 이름이기 때문에 명시적 작성
 
 #on: 어떤 Event로 인해 GitHub Actions를 Trigger 시킬지 사용할 있는데 이때 on Keyword 사용
 on: push # push Evnet에 의해서 Workflow를 Trigger
