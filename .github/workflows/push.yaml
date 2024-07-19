@@ -1,0 +1,12 @@
+name: push-workflow # 생략해도 상관없지만 Action화면에서 표현될 시각화할 이름이기 때문에 명시적 작성
+
+#on: 어떤 Event로 인해 GitHub Actions를 Trigger 시킬지 사용할 있는데 이때 on Keyword 사용
+on: push # push Evnet에 의해서 Workflow를 Trigger
+
+jobs:
+  push-job: # 'push-job' 라는 이름의 Job 생성
+    # Job을 실행시킬 Runner를 지정하려면 runs-on Keyword 사용
+    runs-on: ubuntu-latest # push-job이 Ubuntu Machine에서 실행
+    steps:
+      - name: step1
+        run: echo hello world
