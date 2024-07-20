@@ -29,6 +29,7 @@ jobs:
           ## 기존 의존성이 변경되었을 때 새로운 Cache를 생성하기 위해 사용된다.
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           # restore-keys : Cache 복구를 위한 Key
+          ## Key가 정확히 일치하는 Cache가 없을 경우 가장 가까운 Cache를 찾아서 사용하기 위함이다.
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Install dependencies
