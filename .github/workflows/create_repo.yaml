@@ -21,7 +21,7 @@ jobs:
     steps:
       - name: gh auth login
         run: |
-          echo ${{ secrets.PERSONAL_ACCESS_TOKEN }} | gh aut hlogin --with-token
+          echo ${{ secrets.PERSONAL_ACCESS_TOKEN }} | gh auth login --with-token
       - name: create-repo
         run: |
           gh repo create hamin-action/${{ input.prefix }}-${{ inputs.name }} --public --add-readme
