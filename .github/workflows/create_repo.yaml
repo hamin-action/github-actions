@@ -28,20 +28,23 @@ jobs:
           gh repo create hamin-action/${{ inputs.prefix }}-${{ inputs.name }} --public --add-readme
       - name: slack
         if: always()
+        id: slack
         uses: slackapi/slack-github-action@v1.26.0
         with:
           payload: |
             {
               "attachments": [
-                "pretext": "create repo result",
-                "color": "28a745",
-                "fields": [
-                  {
-                    "title": "create repo result ${{ steps.create-repo.outcome }}",
-                    "short": true,
-                    "value": "${{ inputs.prefix }}-${{ inputs.name }}"
-                  }
-                ]
+                {
+                  "pretext": "create repo result",
+                  "color": "28a745",
+                  "fields": [
+                    {
+                      "title": "create repo result ${{ steps.create-repo.outcome }}",
+                      "short": true,
+                      "value": "${{ inputs.prefix }}-${{ inputs.name }}"
+                    }
+                  ]
+                }
               ]
             }
         env:
