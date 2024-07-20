@@ -6,22 +6,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: startswith
-        if: startsWith('github actions', 'git');
+        if: startsWith('github actions', 'git')
         run: echo "git"
       - name: startswith
-        if: startsWith('github actions', 'test');
+        if: startsWith('github actions', 'test')
         run: echo "git"
 
       - name: endswith
-        if: endsWith('github actions', 'ions');
+        if: endsWith('github actions', 'ions')
         run: echo "git"
       - name: endswith
-        if: endsWith('github actions', 'test');
+        if: endsWith('github actions', 'test')
         run: echo "git"
 
       - name: contains
-        if: contains('github actions', 'act');
+        if: contains('github actions', 'act')
         run: echo "git"
       - name: contains
-        if: contains('github, actions', 'git');
+        if: contains('github, actions', 'git')
         run: echo "git"
