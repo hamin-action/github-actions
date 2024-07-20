@@ -1,0 +1,41 @@
+name: cache
+on:
+  push:
+    paths:
+      # my-app Directory 아래의 모든 File을 포함
+      - "my-app/**"
+
+jobs:
+  cache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: setup-node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Cache Node.js modules
+        uses: actions/cache@v3
+        with:
+          # Caching할 경로를 설정하고, 값으로는 Node.js의 Module이 저장되는 .npm을 지정
+          path: ~/.npm
+          # key는 Cache의 Key를 뜻하고, 값으로 운영체제와 package-lock.json의 Hash값으로 구성
+          # 이는 운영체제별 의존성별로 Cache를 구분하기 위함이다.
+          # runner.os : GitHub Actions를 실행하는 OS 이다. 각 OS 별로 Cache를 분리하기 위해 사용된다.
+          # node : 임의의 문자열 Cache의 범주를 나타내기 위해 사용. 여기서는 Node.js의 Module을 Cache한다는 의미로 사용
+          # hashFiles('**/package-lock.json') : package-lock.json File의 Hash값을 나타낸다.
+          ## 이 Hash 값은 package-lock.json File이 변경될 때마다 바뀌기 때문에 새로운 의존성이 추가되거나,
+          ## 기존 의존성이 변경되었을 때 새로운 Cache를 생성하기 위해 사용된다.
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          # restore-keys : Cache 복구를 위한 Key
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install dependencies
+        run: |
+          cd my-app
+          npm ci
+      - name: npm build
+        run: |
+          cd my-app
+          npm run build
